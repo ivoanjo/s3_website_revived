@@ -18,7 +18,9 @@ libraryDependencies += "org.yaml" % "snakeyaml" % "1.13"
 
 libraryDependencies += "org.jruby" % "jruby" % "1.7.27"
 
-libraryDependencies += "com.amazonaws" % "aws-java-sdk" % "1.12.145"
+libraryDependencies += "com.amazonaws" % "aws-java-sdk-s3" % "1.12.145" excludeAll ExclusionRule(organization = "com.fasterxml")
+libraryDependencies += "com.amazonaws" % "aws-java-sdk-cloudfront" % "1.12.145" excludeAll ExclusionRule(organization = "com.fasterxml")
+libraryDependencies += "com.amazonaws" % "aws-java-sdk-sts" % "1.12.145" excludeAll ExclusionRule(organization = "com.fasterxml")
 
 libraryDependencies += "log4j" % "log4j" % "1.2.17"
 
@@ -37,3 +39,9 @@ resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repos
 jarName in assembly := "s3_website.jar"
 
 test in assembly := {}
+
+mergeStrategy in assembly := {
+ case PathList("module-info.class", xs @ _*) => MergeStrategy.discard
+ case PathList("META-INF", "MANIFEST.MF", xs @ _*) => MergeStrategy.discard
+ case x => MergeStrategy.first
+}

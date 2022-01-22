@@ -250,7 +250,7 @@ def download_jar(jar_lookup_paths, logger)
   logger.info_msg "Downloading #{download_url} into #{downloaded_jar}"
   require 'open-uri'
   open(downloaded_jar, 'wb') do |file|
-    file << open(download_url).read
+    file << URI.open(download_url).read
   end
   downloaded_jar
 end

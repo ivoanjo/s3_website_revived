@@ -4,7 +4,7 @@ name := "s3_website"
 
 version := "0.0.1"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.12"
 
 scalacOptions += "-feature"
 

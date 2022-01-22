@@ -105,7 +105,7 @@ class Cli < Thor
     project_root = File.expand_path(File.dirname(__FILE__)+ '/..')
     logger = Logger.new(options[:verbose])
     success =
-      if run_with_sbt(project_root)
+      if false && run_with_sbt(project_root) # TODO: Disabled this because current sbt is too old
         Dir.chdir(project_root) {
           system './sbt assembly' # Build the jar
         }

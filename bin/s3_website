@@ -215,7 +215,7 @@ def resolve_jar(project_root, logger)
   ]
   found_jar = jar_lookup_paths.
     select { |jar_path|
-      File.exists? jar_path
+      File.exist? jar_path
     }.
     first
   # def jar_has_valid_checksum(jar_path, logger)

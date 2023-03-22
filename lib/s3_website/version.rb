@@ -1,3 +1,3 @@
 module S3Website
-  VERSION = '3.5.0.dev'
+  VERSION = '4.0.0'
 end

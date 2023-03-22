@@ -1,11 +1,10 @@
 # Deploy your website to S3
 
-[![Build Status](https://travis-ci.org/laurilehmijoki/s3_website.png?branch=master)](https://travis-ci.org/laurilehmijoki/s3_website)
-[![Gem Version](https://fury-badge.herokuapp.com/rb/s3_website.png)](http://badge.fury.io/rb/s3_website)
+[![Gem Version](https://fury-badge.herokuapp.com/rb/s3_website_revived.png)](http://badge.fury.io/rb/s3_website_revived)
 
-# This is a fork of s3_website with fixed support for Ruby 3.1 and Java 11 and 17. Feedback is welcome.
+# This is a fork of s3_website with fixed support for Ruby 3.1 and Java 11 and 17. Feedback is welcome. Big thanks to the original author Lauri Lehmijoki!
 
-## What `s3_website` can do for you
+## What `s3_website_revived` can do for you
 
 * Create and configure an S3 website for you
 * Upload your static website to AWS S3
@@ -17,9 +16,9 @@
 
 ## Install
 
-    gem install s3_website
+    gem install s3_website_revived
 
-s3_website needs both [Ruby](https://www.ruby-lang.org/en/downloads/)
+s3_website_revived needs both [Ruby](https://www.ruby-lang.org/en/downloads/)
 and [Java](http://java.com) to run. (S3_website is partly written in Scala, hence the need for Java.)
 
 ## Usage
@@ -27,7 +26,7 @@ and [Java](http://java.com) to run. (S3_website is partly written in Scala, henc
 Here's how you can get started:
 
 * Create API credentials that have sufficient permissions to S3. More info
-  [here](https://github.com/laurilehmijoki/s3_website/tree/master/additional-docs/setting-up-aws-credentials.md).
+  [here](https://github.com/ivoanjo/s3_website_revived/tree/master/additional-docs/setting-up-aws-credentials.md).
 * Go to your website directory
 * Run `s3_website cfg create`. This generates a configuration file called `s3_website.yml`.
 * Put your AWS credentials and the S3 bucket name into the file
@@ -80,7 +79,7 @@ s3_secret: <%= ENV['S3_SECRET'] %>
 s3_bucket: blog.example.com
 ```
 
-(If you are using `s3_website` on an [EC2 instance with IAM
+(If you are using `s3_website_revived` on an [EC2 instance with IAM
 roles](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UsingIAM.html#UsingIAMrolesWithAmazonEC2Instances),
 you can omit the `s3_id` and `s3_secret` keys in the config file.)
 
@@ -145,7 +144,7 @@ Force-pushing allows you to update the S3 object metadata of existing files.
 
 #### cache_control
 
-The `cache_control` setting allows you to define an arbitrary string that s3_website
+The `cache_control` setting allows you to define an arbitrary string that s3_website_revived
 will put on all the S3 objects of your website.
 
 Here's an example:
@@ -168,7 +167,7 @@ Force-pushing allows you to update the S3 object metadata of existing files.
 
 ### Content type detection
 
-By default, s3_website automatically detects the content type of a file with the help of Apache Tika.
+By default, s3_website_revived automatically detects the content type of a file with the help of Apache Tika.
 
 For some file types Tika's auto detection does not work correctly. Should this problem affect you, use the `content_type`
 setting to override Tika's decision:
@@ -206,7 +205,7 @@ not the pre-processed extensions.
 
 After changing the `gzip` setting, push with the `--force` option.
 
-s3_website will not gzip a file that is already gzipped. This is useful in the
+s3_website_revived will not gzip a file that is already gzipped. This is useful in the
 situations where your build tools gzip a file before you invoke `s3_website push`.
 
 ### Using non-standard AWS regions
@@ -340,7 +339,7 @@ file:
 cloudfront_invalidate_root: true
 ```
 
-To recap, this setting instructs s3_website to invalidate the root resource
+To recap, this setting instructs s3_website_revived to invalidate the root resource
 (e.g., *article/*) instead of the filename'd resource (e.g.,
 *article/index.html*).
 
@@ -373,7 +372,7 @@ Note that the root forward slash is omitted in the requested page path and inclu
 
 This redirect will be created as a 301 redirect from the first URL to the destination URL on the same server with the same http protocol.
 
-Under the hood `s3_website` creates a zero-byte index.html page for each path you want redirected with the appropriate `x-amz-website-redirect-location` value in the metadata for the object. See Amazon S3's
+Under the hood `s3_website_revived` creates a zero-byte index.html page for each path you want redirected with the appropriate `x-amz-website-redirect-location` value in the metadata for the object. See Amazon S3's
 [`x-amz-website-redirect-location`](http://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html)
 documentation for more details.
 
@@ -407,7 +406,7 @@ Here:
 * ```redirect:``` indicates the start of the redirect definition 
 * ```protocol:``` is optional and defaults to http.
 * ```host_name:``` is optional but the default is the amazonaws.com bucket name not the actual domain name so this also effectively required for our site. In this example we use an environment variable to store the server hostname to support building to different environments. ```REDIRECT_DOMAIN_NAME``` can be configured on a CI server as well any CodePipelines responsible for building the site to different environments.  If you're running locally you'll need to set ```REDIRECT_DOMAIN_NAME=local.myhostname.com```
-* ```replace_key_prefix_with:``` indicates the substitution to use in place of the matched prefix. This is the only field required by `s3_website`, so effectively this rule works like a replace rule e.g. replace portfolio/work with /work in the string portfolio/work/walkjogrun
+* ```replace_key_prefix_with:``` indicates the substitution to use in place of the matched prefix. This is the only field required by `s3_website_revived`, so effectively this rule works like a replace rule e.g. replace portfolio/work with /work in the string portfolio/work/walkjogrun
 * ```http_redirect_code:``` is optional and defaults to 302 Temporary redirect **which is terrible for SEO** since your content temporarily vanishes from the Google index until the response changes for the URL. This is almost never what you want. You *can* use this to temporarily redirect any content you haven't migrated to the new site yet as long as you remove or replace the 302 with a link to a permanent home. This tells Google to forget the old location of the page and use the new content at the new URL. For pages that move you'll see little if any discrepancy in Google traffic. 
 
 After adding the configuration, run the command `s3_website cfg apply` on your
@@ -415,7 +414,7 @@ command-line interface. This will apply the routing rules on your S3 bucket.
 
 For more information on configuring redirects, see the documentation of the
 [configure-s3-website](https://github.com/laurilehmijoki/configure-s3-website#configuring-redirects)
-gem, which comes as a transitive dependency of the `s3_website` gem. (The
+gem, which comes as a transitive dependency of the `s3_website_revived` gem. (The
 command `s3_website cfg apply` internally calls the `configure-s3-website` gem.)
 
 #### Prefix coallescing for deleting pages (or consolidating)
@@ -458,7 +457,7 @@ In this context, the word *object* refers to object on S3, not file-system file.
 
 ### Specifying custom concurrency level
 
-By default, `s3_website` does 3 operations in parallel. An operation can be an
+By default, `s3_website_revived` does 3 operations in parallel. An operation can be an
 HTTP PUT operation against the S3 API, for example.
 
 You can increase the concurrency level by adding the following setting into the
@@ -542,10 +541,10 @@ Please create an issue and send a pull request if you spot any.
 
 ## Versioning
 
-s3_website uses [Semantic Versioning](http://semver.org).
+s3_website_revived uses [Semantic Versioning](http://semver.org).
 
 In the spirit of semantic versioning, here is the definition of public API for
-s3_website: Within a major version, s3_website will not break
+s3_website_revived: Within a major version, s3_website_revived will not break
 backwards-compatibility of anything that is mentioned in this README file.
 
 ## Development
@@ -554,15 +553,15 @@ See [development](additional-docs/development.md).
 
 ### Contributing
 
-We (users and developers of s3_website) welcome patches, pull requests and
+We (users and developers of s3_website_revived) welcome patches, pull requests and
 ideas for improvement.
 
 When sending pull requests, please accompany them with tests. Favor BDD style
 in test descriptions. Use VCR-backed integration tests where possible. For
-reference, you can look at the existing s3_website tests.
+reference, you can look at the existing s3_website_revived tests.
 
 If you are not sure how to test your pull request, you can ask the [gem owners
-](http://rubygems.org/gems/s3_website) to supplement the request with tests.
+](http://rubygems.org/gems/s3_website_revived) to supplement the request with tests.
 However, by including proper tests, you increase the chances of your pull
 request being incorporated into future releases.
 
@@ -577,12 +576,12 @@ MIT. See the LICENSE file for more information.
 
 ## Contributors
 
-This gem is created by Lauri Lehmijoki. Without the valuable work of [Philippe
+This gem was originally created by Lauri Lehmijoki. Without the valuable work of [Philippe
 Creux](https://github.com/pcreux) on
 [jekyll-s3](https://github.com/laurilehmijoki/jekyll-s3), this project would not
 exist.
 
-See the [Contributors](https://github.com/laurilehmijoki/s3_website/graphs/contributors).
+See the [Contributors](https://github.com/ivoanjo/s3_website_revived/graphs/contributors).
 
 ## Community articles
 
@@ -590,6 +589,3 @@ See the [Contributors](https://github.com/laurilehmijoki/s3_website/graphs/contr
 * [How To: Hosting on Amazon S3 with CloudFront](https://paulstamatiou.com/hosting-on-amazon-s3-with-cloudfront/)
 * [Zero to HTTP/2 with AWS and Hugo](https://habd.as/zero-to-http-2-aws-hugo/)
 
-## Donations
-
-[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/laurilehmijoki/)

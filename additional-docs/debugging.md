@@ -4,7 +4,7 @@
 
 First, clone the git repository:
 
-    git clone https://github.com/laurilehmijoki/s3_website.git /tmp/s3_website
+    git clone https://github.com/ivoanjo/s3_website_revived.git /tmp/s3_website
 
 Next, edit a source file.
 

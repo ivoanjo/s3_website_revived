@@ -2,15 +2,15 @@
 require File.join([File.dirname(__FILE__),'lib','s3_website','version.rb'])
 
 Gem::Specification.new do |s|
-  s.name        = "s3_website"
+  s.name        = "s3_website_revived"
   s.version     = S3Website::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Lauri Lehmijoki"]
-  s.email       = ["lauri.lehmijoki@iki.fi"]
-  s.homepage    = "https://github.com/laurilehmijoki/s3_website"
-  s.summary     = %q{Manage your S3 website}
+  s.authors     = ["Ivo Anjo", "Lauri Lehmijoki"]
+  s.email       = ["ivo@ivoanjo.me"]
+  s.homepage    = "https://github.com/ivoanjo/s3_website_revived"
+  s.summary     = %q{Revived fork of s3_website - Manage your S3 website}
   s.description = %q{
-    Sync website files, set redirects, use HTTP performance optimisations, deliver via
+    Revived fork of s3_website. Sync website files, set redirects, use HTTP performance optimisations, deliver via
     CloudFront.
   }
   s.license     = 'MIT'

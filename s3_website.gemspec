@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   }
   s.license     = 'MIT'
 
-  s.add_dependency 'thor', '~> 0.18'
+  s.add_dependency 'thor', '~> 1.2.1'
   s.add_dependency 'configure-s3-website', '= 2.3.0'
   s.add_dependency 'colored', '1.2'
   s.add_dependency 'dotenv', '~> 1.0'

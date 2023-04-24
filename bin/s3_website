@@ -124,6 +124,12 @@ class Cli < Thor
     end
   end
 
+  def help
+    version
+    puts
+    super
+  end
+
   desc 'install', 'Download s3_website.jar'
   long_desc <<-LONGDESC
     Use `s3_website install` to download the s3_website.jar dependency

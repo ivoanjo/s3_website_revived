@@ -137,6 +137,14 @@ class Cli < Thor
 
   desc 'cfg SUBCOMMAND ...ARGS', 'Operate on the config file'
   subcommand 'cfg', Cfg
+
+  map '--version' => :version
+  map '-version' => :version
+  map '-v' => :version
+  desc 'version', 'Print version info'
+  def version
+    puts "s3_website_revived #{S3Website::VERSION}"
+  end
 end
 
 def run_with_sbt(project_root)

@@ -13,7 +13,7 @@ class Cfg < Thor
   def create
     config_file_src = File.dirname(__FILE__) + '/../resources/configuration_file_template.yml'
     config_file = Dir.pwd + '/s3_website.yml'
-    unless File.exists? config_file
+    unless File.exist? config_file
       require 'fileutils'
       FileUtils.cp config_file_src, config_file
       puts "Created the config file s3_website.yml. Go fill it with your settings."

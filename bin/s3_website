@@ -124,7 +124,7 @@ class Cli < Thor
     end
   end
 
-  def help
+  def help(cmd = nil)
     version
     puts
     super
